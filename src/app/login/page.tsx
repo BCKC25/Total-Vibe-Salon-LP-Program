@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 type Location = { id: string; name: string };
 
@@ -69,7 +70,15 @@ function LoginForm() {
           padding: "28px 24px",
         }}
       >
-        <p style={{ fontFamily: "var(--font-serif)", fontSize: 18, color: "var(--ink)", margin: "0 0 20px" }}>
+        <Image
+          src="/tvs-logo.png"
+          alt="Total Vibe Salon"
+          width={1024}
+          height={1024}
+          style={{ height: "auto", width: 72, margin: "0 auto 16px", display: "block" }}
+          priority
+        />
+        <p style={{ fontFamily: "var(--font-serif)", fontSize: 18, color: "var(--ink)", margin: "0 0 20px", textAlign: "center" }}>
           Staff sign in
         </p>
 

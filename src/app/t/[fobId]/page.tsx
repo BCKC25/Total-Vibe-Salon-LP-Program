@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getFobStatus } from "@/lib/fobStatus";
 import { RewardActions } from "./RewardActions";
 
@@ -49,9 +50,16 @@ export default async function FobStatusPage({
           of {status.punchesRequired}
         </text>
       </svg>
-      <p style={{ fontFamily: "var(--font-serif)", fontSize: 20, letterSpacing: "0.04em", color: "var(--ink)", margin: "8px 0 4px" }}>
-        {status.businessName.toUpperCase()}
-      </p>
+      {/* Logo image, not text — the script "Vibe" lettering doesn't hold up
+          re-created in live UI text at small sizes. See CLAUDE.md "Brand". */}
+      <Image
+        src="/tvs-logo.png"
+        alt={status.businessName}
+        width={1024}
+        height={1024}
+        style={{ height: "auto", width: 110, margin: "8px auto 4px", display: "block" }}
+        priority
+      />
       <p style={{ fontSize: 13, color: "var(--ink-muted)", margin: "0 0 18px" }}>Hair &bull; Makeup &bull; Cosmetics</p>
 
       {status.rewardReady ? (
