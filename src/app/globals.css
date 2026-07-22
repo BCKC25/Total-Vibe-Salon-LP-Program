@@ -1,0 +1,24 @@
+:root {
+  /* Total Vibe Salon — blush pink + black, drawn from the logo. */
+  --ivory: #fdf1f3;
+  --card: #fffbfc;
+  --ink: #1a1414;
+  --ink-muted: #6b5c5e;
+  --ink-faint: #ab9294;
+  --gold: #d68fa0;
+  --gold-line: #f0d3d9;
+  --bronze: #b5677d;
+  --sage: #7c8a63;
+  --sage-bg: #eef0e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  margin: 0;
+}

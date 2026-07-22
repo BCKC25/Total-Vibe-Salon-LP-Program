@@ -1,0 +1,12 @@
+# Caddy automatically gets a free, auto-renewing HTTPS certificate from
+# Let's Encrypt the first time it starts, using this domain — no cron
+# jobs, no manual renewal. See CLAUDE.md "Domain + HTTPS".
+#
+# REPLACE the placeholder below with the real domain once you have it,
+# then restart Caddy (docker compose -f docker-compose.prod.yml restart caddy).
+# Until you replace it, this file does nothing — the Caddy service isn't
+# started unless you're using the "caddy" profile, see docker-compose.prod.yml.
+
+REPLACE_WITH_YOUR_DOMAIN.com {
+    reverse_proxy app:3000
+}

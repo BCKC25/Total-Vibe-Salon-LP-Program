@@ -1,0 +1,31 @@
+# Production build: `next build` once at image-build time, then
+# `next start` serves the pre-built output. Dramatically faster than
+# `Dockerfile`'s dev-mode setup, which recompiles each route on first
+# hit — that on-demand compile lag is what was making the punch rate
+# limit look "stuck" on a modest VPS. See CLAUDE.md "Production deploy".
+#
+# Use this via docker-compose.prod.yml, not docker-compose.yml (which
+# stays on `next dev` for local iteration with hot reload).
+
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+EXPOSE 3000
+CMD ["npm", "run", "start"]
